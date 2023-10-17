@@ -4,11 +4,11 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-object ConnectionUtil {
+class ConnectionUtil {
     private var connection: Connection? = null
     fun getConnection(): Connection? {
         if (connection == null) {
-            val url = "jdbc:mysql://localhost:3306/tripapp"
+            val url = "jdbc:mysql://localhost:3306/tripdb"
             val username = "root"
             val password = "cosmic"
             try {

@@ -36,6 +36,7 @@ class SecurityConfig (
             .requestMatchers("/api/customer/fetch_review_of_user").authenticated()
             .requestMatchers("/api/customer/fetch_review_by_location").authenticated()
             .requestMatchers("/api/customer/add_review").authenticated()
+            .requestMatchers("/api/customer/change_password").authenticated()
             .anyRequest().permitAll()
         }
 

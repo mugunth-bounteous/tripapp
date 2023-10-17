@@ -88,5 +88,16 @@ class CustomerController(private val accountRepo:AccountRepository, private val 
         return ReviewService(reviewRepository).FetchReviewByLocationId(req.locationId);
     }
 
+    @PostMapping("/change_password")
+    fun changePassword(
+        @RequestBody req: ChangePasswordDto,
+        @RequestHeader(name = "Authorization") authorizationHeader: String
+    ): ResponseEntity<Any?> {
+        val ret = authorizationHeader.substring(7)
+        val data = tokenService.parseToken(ret);
+        val username = data!!.get().username!!;
+        return ChangePasswordService().changePassword(req,username);
+    }
+
 
 }

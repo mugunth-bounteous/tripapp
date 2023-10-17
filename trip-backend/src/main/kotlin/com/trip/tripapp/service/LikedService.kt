@@ -5,15 +5,19 @@ import com.trip.tripapp.dto.ResponseMessage
 import com.trip.tripapp.model.TripDetailsDao
 import com.trip.tripapp.repository.AccountRepository
 import com.trip.tripapp.repository.TripRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 class LikedService(val accountRepo:AccountRepository,val tripRepo:TripRepository) {
+    var logger: Logger = LoggerFactory.getLogger(LikedService::class.java)
     fun AddOrRemoveLiked(req:LikedReqDto, username:String):ResponseEntity<Any?>{
         val acc=accountRepo.findById(username);
         if(acc.isPresent()){
             val obj=acc.get();
-            println(obj.likedPlaces.toString())
+//            println(obj.likedPlaces.toString())
+            logger.info(obj.likedPlaces.toString());
             if(req.isLiked){
                 obj.appendToLiked(req.locationId)
                 accountRepo.save(obj)

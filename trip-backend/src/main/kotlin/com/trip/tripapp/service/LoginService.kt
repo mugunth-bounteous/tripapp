@@ -13,11 +13,8 @@ class LoginService(private val accountRepo: AccountRepository,private val tokenS
 
     fun loginService(req:LoginDto): ResponseEntity<Any?> {
         val response= FetchAccountRepoService(accountRepo).fetchAccount(req)
-//        println("response.isPresent() : ${response.isPresent()}")
-//        println(response.get().password)
         if(response.isPresent()){
-//            println("req.password : ${req.password}")
-//            println("response.password : ${response.get().password}")
+
             if(req.password.equals(response.get().password)){
                 val retemp=LoginResponseDto(token = tokenService.createToken(response.get()),data= response.get())
               return ResponseEntity<Any?>(ResponseMessage(status = "OK", message = retemp), HttpStatus.valueOf(200))

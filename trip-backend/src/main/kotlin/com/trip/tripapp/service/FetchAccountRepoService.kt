@@ -3,16 +3,24 @@ package com.trip.tripapp.service
 import com.trip.tripapp.dto.*
 import com.trip.tripapp.model.AccountDao
 import com.trip.tripapp.repository.AccountRepository
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.util.*
+import org.slf4j.Logger
+
 
 @Component
 class FetchAccountRepoService(private val accountRepo: AccountRepository){
 
-    fun fetchAccount(req:LoginDto): Optional<AccountDao?> {
+    var logger: Logger = LoggerFactory.getLogger(FetchAccountRepoService::class.java)
+
+
+        fun fetchAccount(req:LoginDto): Optional<AccountDao?> {
         val account = accountRepo.findById(req.username)
 //        println(account)
+            logger.info(account.toString());
 //        println(account.get().username)
+            logger.info(account.get().username)
 //        accountRepo.findAll().forEach { k -> println(k.username) }
         return account;
     }
